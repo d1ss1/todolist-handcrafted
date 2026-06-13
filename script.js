@@ -7,15 +7,19 @@ let tasks = [];
 
 function addTask() {
   const text = taskInput.value.trim();
+  const newTask = {
+    id: Date.now(),
+    title: text,
+  };
 
   if (text === "") {
     alert("Enter a Task");
     return;
   }
 
-  tasks.push(text);
+  tasks.push(newTask);
   saveData();
-  createTaskElement(text);
+  createTaskElement(newTask);
   taskInput.value = "";
   updateCounter();
 }
@@ -45,15 +49,15 @@ function loadData() {
   }
 }
 
-function createTaskElement(text) {
+function createTaskElement(title) {
   const delBtn = document.createElement("button");
   delBtn.textContent = "×";
   const li = document.createElement("li");
-  li.textContent = text;
+  li.textContent = title.title;
 
   delBtn.addEventListener("click", function () {
     li.remove();
-    tasks = tasks.filter((t) => t !== text);
+    tasks = tasks.filter((t) => t !== title);
     updateCounter();
     saveData();
   });
