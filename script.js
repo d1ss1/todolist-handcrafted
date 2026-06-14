@@ -10,6 +10,7 @@ function addTask() {
   const newTask = {
     id: Date.now(),
     title: text,
+    completed: false,
   };
 
   if (text === "") {
@@ -52,7 +53,13 @@ function loadData() {
 function createTaskElement(title) {
   const delBtn = document.createElement("button");
   delBtn.textContent = "×";
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.checked = title.completed;
   const li = document.createElement("li");
+  if (title.completed === true) {
+    li.style.textDecoration = "line-through";
+  }
   li.textContent = title.title;
 
   delBtn.addEventListener("click", function () {
@@ -62,7 +69,18 @@ function createTaskElement(title) {
     saveData();
   });
 
+  input.addEventListener("change", function () {
+    title.completed = input.checked;
+    if (title.completed === true) {
+      li.style.textDecoration = "line-through";
+    } else {
+      li.style.textDecoration = "";
+    }
+    saveData();
+  });
+
   li.appendChild(delBtn);
+  li.prepend(input);
   taskList.appendChild(li);
 }
 
