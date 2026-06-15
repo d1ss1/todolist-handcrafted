@@ -30,10 +30,20 @@ body {
 }
 #taskList {
   list-style: none;
+  margin-top: 20px;
 }
 #taskList li {
   background: rgba(145, 180, 255, 0.8);
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid;
+  padding: 6px;
+}
+#taskList button {
+  height: 25px;
+  width: 25px;
+  border-radius: 8px;
+  background: rgb(255, 68, 68);
+  border: 0px solid;
+  cursor: pointer;
 }
