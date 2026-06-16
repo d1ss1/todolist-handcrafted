@@ -57,10 +57,11 @@ function createTaskElement(title) {
   input.type = "checkbox";
   input.checked = title.completed;
   const li = document.createElement("li");
+  const span = document.createElement("span");
   if (title.completed === true) {
-    li.style.textDecoration = "line-through";
+    span.style.textDecoration = "line-through";
   }
-  li.textContent = title.title;
+  span.textContent = title.title;
 
   delBtn.addEventListener("click", function () {
     li.remove();
@@ -72,16 +73,17 @@ function createTaskElement(title) {
   input.addEventListener("change", function () {
     title.completed = input.checked;
     if (title.completed === true) {
-      li.style.textDecoration = "line-through";
+      span.style.textDecoration = "line-through";
     } else {
-      li.style.textDecoration = "";
+      span.style.textDecoration = "";
     }
     saveData();
   });
 
   li.appendChild(delBtn);
-  li.prepend(input);
   taskList.appendChild(li);
+  li.insertBefore(span, delBtn);
+  li.prepend(input);
 }
 
 function updateCounter() {
