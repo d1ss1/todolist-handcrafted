@@ -3,6 +3,7 @@ const addBtn = document.getElementById("addBtn");
 const taskList = document.getElementById("taskList");
 const taskCounter = document.getElementById("taskCounter");
 
+let currentFilter = "all"
 let tasks = [];
 
 function addTask() {
@@ -20,9 +21,8 @@ function addTask() {
 
   tasks.push(newTask);
   saveData();
-  createTaskElement(newTask);
+  renderTasks(currentFilter);
   taskInput.value = "";
-  updateCounter();
 }
 
 addBtn.addEventListener("click", addTask);
@@ -43,10 +43,7 @@ function loadData() {
   if (saved) {
     tasks = JSON.parse(saved);
 
-    tasks.forEach(function (t) {
-      createTaskElement(t);
-    });
-    updateCounter();
+    renderTasks("all");
   }
 }
 
@@ -64,10 +61,9 @@ function createTaskElement(title) {
   span.textContent = title.title;
 
   delBtn.addEventListener("click", function () {
-    li.remove();
     tasks = tasks.filter((t) => t !== title);
-    updateCounter();
     saveData();
+    renderTasks(currentFilter);
   });
 
   input.addEventListener("change", function () {
@@ -86,11 +82,43 @@ function createTaskElement(title) {
   li.prepend(input);
 }
 
-function updateCounter() {
-  if (tasks.length <= 1) {
-    taskCounter.textContent = "Left: " + tasks.length + " task";
-  } else {
-    taskCounter.textContent = "Left: " + tasks.length + " tasks";
+function updateCounter(count, filter) {
+  if (filter === "all") {
+    if (count === 1) {
+      taskCounter.textContent = count + " task";
+    } else {
+      taskCounter.textContent = count + " tasks";
+    }
   }
+  if (filter === "active") {
+    if (count === 1) {
+      taskCounter.textContent = "Left: " + count + " task";
+    } else {
+      taskCounter.textContent = "Left: " + count + " tasks";
+    }
+  }  
+  if (filter === "completed") {
+    if (count === 1) {
+      taskCounter.textContent = "Done: " + count + " task";
+    } else {
+      taskCounter.textContent = "Done: " + count + " tasks";
+    }
+  }   
+}
+function renderTasks(filter) {
+  taskList.innerHTML = "";
+  let filteredTasks = tasks.filter(function (t) {
+    if (filter === "all") {
+      return true;
+    }
+    if (filter === "active") {
+      return t.completed === false;
+    }
+    if (filter === "completed") {
+      return t.completed === true;
+    }
+  });
+  filteredTasks.forEach(createTaskElement);
+  updateCounter(filteredTasks.length, filter);
 }
 loadData();
