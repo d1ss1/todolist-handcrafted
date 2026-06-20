@@ -4,23 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do List</title>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
       <h1>To-Do List</h1>
     </header>
     <main>
+      <div class="filterBtn">
+        <button
+          onclick="
+            currentFilter = 'all';
+            renderTasks('all');
+          "
+        >
+          All
+        </button>
+        <button
+          onclick="
+            currentFilter = 'active';
+            renderTasks('active');
+          "
+        >
+          Active
+        </button>
+        <button
+          onclick="
+            currentFilter = 'completed';
+            renderTasks('completed');
+          "
+        >
+          Completed
+        </button>
+      </div>
       <input type="text" id="taskInput" placeholder="Enter Task..." />
       <button id="addBtn">Add Task</button>
-      <div class="filterBtn">
-        <button onclick="currentFilter='all'; renderTasks('all')">All</button>
-        <button onclick="currentFilter='active'; renderTasks('active')">Active</button>
-        <button onclick="currentFilter='completed'; renderTasks('completed')">Completed</button>
-      </div>
       <ul id="taskList"></ul>
       <p id="taskCounter">Left: 0 task</p>
+      <button id="archiveTasks">Archive</button>
     </main>
     <script src="script.js"></script>
   </body>
 </html>
+
