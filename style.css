@@ -32,12 +32,13 @@ h1 {
   width: 90px;
 }
 #addBtn:hover {
+  background: rgba(158, 252, 239, 0.4);
   transform: translateY(-2px);
   box-shadow: 5px 5px 16.5px rgba(0, 0, 0, 0.3);
 }
 #addBtn:active {
   transform: translateY(0px);
-  box-shadow: 0px 0px 0px;
+  box-shadow: none;
 }
 #taskList {
   list-style: none;
@@ -61,7 +62,7 @@ h1 {
   transition: all 0.4s ease;
 }
 #taskList button:hover {
-  transform: translateY(-1.6px);
+  transform: translateY(-1px);
   background: rgb(255, 68, 68, 0.895);
   box-shadow: 5px 5px 16.5px rgba(0, 0, 0, 0.3);
 }
@@ -101,10 +102,46 @@ main {
 }
 .filterBtn button:hover {
   background: rgba(255, 255, 255, 0.83);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow: 4px 4px 16.5px rgba(0, 0, 0, 0.3);
 }
 .filterBtn button:active {
+  background: white;
+  transform: translateY(0px);
+  box-shadow: none;
+}
+#taskList .returnBtn {
+  background: rgb(80, 152, 247);
+  transition: all 0.4s ease;
+}
+#taskList .returnBtn:hover {
+  background: rgba(80, 152, 247, 0.726);
+  transform: translateY(-1px);
+}
+#taskList .returnBtn:active {
+  background: rgba(80, 152, 247);
+  transform: translateY(0px);
+  box-shadow: none;
+}
+.btnGroup {
+  display: flex;
+  gap: 10px;
+}
+#archiveTasks {
+  background: white;
+  float: right;
+  padding: 11px;
+  border-radius: 16px;
+  border: 0px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+#archiveTasks:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1.2px);
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+}
+#archiveTasks:active {
   background: white;
   transform: translateY(0px);
   box-shadow: none;
