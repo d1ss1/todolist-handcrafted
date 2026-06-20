@@ -164,6 +164,11 @@ function createArchiveTaskElement(title) {
   input.checked = title.completed;
   const li = document.createElement("li");
   const span = document.createElement("span");
+  const returnBtn = document.createElement("button");
+  returnBtn.textContent = "↩";
+  returnBtn.classList.add("returnBtn");
+  const btnGroup = document.createElement("div");
+  btnGroup.classList.add("btnGroup");
 
   if (title.completed === true) {
     span.style.textDecoration = "line-through";
@@ -183,10 +188,18 @@ function createArchiveTaskElement(title) {
     }
     saveData();
   });
+  returnBtn.addEventListener("click", function () {
+    archivedTasks = archivedTasks.filter((t) => t !== title);
+    tasks.push(title);
+    saveData();
+    renderArchive(currentFilter);
+  });
 
-  li.appendChild(delBtn);
+  btnGroup.appendChild(returnBtn);
+  btnGroup.appendChild(delBtn);
+  li.appendChild(btnGroup);
   taskList.appendChild(li);
-  li.insertBefore(span, delBtn);
+  li.insertBefore(span, btnGroup);
   li.prepend(input);
 }
 loadData();
