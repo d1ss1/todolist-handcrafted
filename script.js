@@ -62,11 +62,25 @@ function createTaskElement(title) {
   input.checked = title.completed;
   const li = document.createElement("li");
   const span = document.createElement("span");
+  const inputEditing = document.createElement("input");
   if (title.completed === true) {
     span.style.textDecoration = "line-through";
   }
   span.textContent = title.title;
 
+  span.addEventListener("click", function () {
+    span.parentNode.insertBefore(inputEditing, span);
+    span.style.display = "none";
+    inputEditing.value = title.title;
+    inputEditing.focus();
+    inputEditing.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        title.title = inputEditing.value;
+        saveData();
+        renderTasks(currentFilter);
+      }
+    });
+  });
   delBtn.addEventListener("click", function () {
     archivedTasks.push(title);
     tasks = tasks.filter((t) => t !== title);
