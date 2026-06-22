@@ -63,7 +63,6 @@ function createTaskElement(title) {
   const li = document.createElement("li");
   const span = document.createElement("span");
   const inputEditing = document.createElement("input");
-  const inputEdit = document.createElement("input");
   inputEditing.id = "inputEdit";
   if (title.completed === true) {
     span.style.textDecoration = "line-through";
@@ -75,7 +74,6 @@ function createTaskElement(title) {
     span.style.display = "none";
     inputEditing.value = title.title;
     inputEditing.focus();
-    inputEditing.blur();
     inputEditing.addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
         if (inputEditing.value === "") {
@@ -88,6 +86,10 @@ function createTaskElement(title) {
         }
       }
     });
+  });
+  inputEditing.addEventListener("blur", function () {
+    span.style.display = "";
+    inputEditing.style.display = "none";
   });
   delBtn.addEventListener("click", function () {
     archivedTasks.push(title);
@@ -225,3 +227,4 @@ function createArchiveTaskElement(title) {
   li.prepend(input);
 }
 loadData();
+
