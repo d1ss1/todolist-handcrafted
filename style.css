@@ -130,7 +130,7 @@ main {
 #archiveTasks {
   background: white;
   float: right;
-  padding: 11px;
+  padding: 12px;
   border-radius: 16px;
   border: 0px;
   cursor: pointer;
@@ -145,4 +145,15 @@ main {
   background: white;
   transform: translateY(0px);
   box-shadow: none;
+}
+span {
+  cursor: default;
+}
+#inputEdit {
+  padding: 6px;
+  border-radius: 12px;
+  border: 0;
+}
+#inputEdit:focus {
+  cursor: text;
 }
