@@ -63,6 +63,8 @@ function createTaskElement(title) {
   const li = document.createElement("li");
   const span = document.createElement("span");
   const inputEditing = document.createElement("input");
+  const inputEdit = document.createElement("input");
+  inputEditing.id = "inputEdit";
   if (title.completed === true) {
     span.style.textDecoration = "line-through";
   }
@@ -73,11 +75,17 @@ function createTaskElement(title) {
     span.style.display = "none";
     inputEditing.value = title.title;
     inputEditing.focus();
+    inputEditing.blur();
     inputEditing.addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
-        title.title = inputEditing.value;
-        saveData();
-        renderTasks(currentFilter);
+        if (inputEditing.value === "") {
+          alert("the string cannot be empty.");
+          return;
+        } else {
+          title.title = inputEditing.value;
+          saveData();
+          renderTasks(currentFilter);
+        }
       }
     });
   });
