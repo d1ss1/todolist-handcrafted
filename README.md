@@ -1,3 +1,11 @@
-# todolist-handcrafted
-to do list on vanilla js handcrafted by me
+# To Do List
 
+## Functional
+
+**Task filters, input field, add button, task list, strikethrough, delete, task counter, archive.** 
+
+## Tech 
+
+**HTML/CSS/JS**
+
+## Link [Live Demo](https://d1ss1.github.io/todolist-handcrafted/)
