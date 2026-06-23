@@ -73,6 +73,7 @@ function createTaskElement(title) {
     span.parentNode.insertBefore(inputEditing, span);
     span.style.display = "none";
     inputEditing.value = title.title;
+    inputEditing.style.display = "";
     inputEditing.focus();
     inputEditing.addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
@@ -227,4 +228,3 @@ function createArchiveTaskElement(title) {
   li.prepend(input);
 }
 loadData();
-
