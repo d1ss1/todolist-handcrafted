@@ -68,6 +68,7 @@ function createTaskElement(title) {
     span.style.textDecoration = "line-through";
   }
   span.textContent = title.title;
+  span.title = "Click to edit"
 
   span.addEventListener("click", function () {
     span.parentNode.insertBefore(inputEditing, span);
