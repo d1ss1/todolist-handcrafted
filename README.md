@@ -8,4 +8,4 @@
 
 **HTML/CSS/JS**
 
-## Link [Live Demo](https://d1ss1.github.io/todolist-handcrafted/)
+## [Live Demo](https://d1ss1.github.io/todolist-handcrafted/)
