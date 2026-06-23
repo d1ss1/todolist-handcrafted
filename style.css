@@ -38,7 +38,7 @@ h1 {
 }
 #addBtn:active {
   transform: translateY(0px);
-  box-shadow: none;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 #taskList {
   list-style: none;
@@ -108,7 +108,7 @@ main {
 .filterBtn button:active {
   background: white;
   transform: translateY(0px);
-  box-shadow: none;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 #taskList .returnBtn {
   background: rgb(80, 152, 247);
@@ -121,7 +121,7 @@ main {
 #taskList .returnBtn:active {
   background: rgba(80, 152, 247);
   transform: translateY(0px);
-  box-shadow: none;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 .btnGroup {
   display: flex;
@@ -144,10 +144,10 @@ main {
 #archiveTasks:active {
   background: white;
   transform: translateY(0px);
-  box-shadow: none;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 span {
-  cursor: default;
+  cursor: pointer;
 }
 #inputEdit {
   padding: 6px;
