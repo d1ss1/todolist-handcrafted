@@ -35,54 +35,77 @@ taskInput.addEventListener("keydown", function (event) {
   }
 });
 
+document.getElementById("allBtn").addEventListener("click", function () {
+  currentFilter = "all";
+  renderTasks("all");
+});
+document.getElementById("activeBtn").addEventListener("click", function () {
+  currentFilter = "active";
+  renderTasks("active");
+});
+document.getElementById("completedBtn").addEventListener("click", function () {
+  currentFilter = "completed";
+  renderTasks("completed");
+});
+
 function saveData() {
   localStorage.setItem("todo-list-archive", JSON.stringify(archivedTasks));
   localStorage.setItem("todo-list", JSON.stringify(tasks));
 }
+try {
+  function loadData() {
+    let savedArchive = localStorage.getItem("todo-list-archive");
+    let saved = localStorage.getItem("todo-list");
 
-function loadData() {
-  let savedArchive = localStorage.getItem("todo-list-archive");
-  let saved = localStorage.getItem("todo-list");
-
-  if (saved) {
-    tasks = JSON.parse(saved);
-
-    renderTasks("all");
+    if (saved) {
+      try {
+        tasks = JSON.parse(saved);
+      } catch {
+        tasks = [];
+      }
+      renderTasks("all");
+    }
+    if (savedArchive) {
+      try {
+        archivedTasks = JSON.parse(savedArchive);
+      } catch {
+        tasks = [];
+      }
+    }
   }
-  if (savedArchive) {
-    archivedTasks = JSON.parse(savedArchive);
-  }
+} catch {
+  tasks = [];
 }
 
-function createTaskElement(title) {
+function createTaskElement(task) {
   const delBtn = document.createElement("button");
   delBtn.textContent = "×";
   const input = document.createElement("input");
   input.type = "checkbox";
-  input.checked = title.completed;
+  input.checked = task.completed;
   const li = document.createElement("li");
   const span = document.createElement("span");
   const inputEditing = document.createElement("input");
   inputEditing.id = "inputEdit";
-  if (title.completed === true) {
+  if (task.completed === true) {
     span.style.textDecoration = "line-through";
   }
-  span.textContent = title.title;
-  span.title = "Click to edit"
+  span.textContent = task.title;
+  span.title = "Click to edit";
 
   span.addEventListener("click", function () {
     span.parentNode.insertBefore(inputEditing, span);
     span.style.display = "none";
-    inputEditing.value = title.title;
+    inputEditing.value = task.title;
     inputEditing.style.display = "";
     inputEditing.focus();
     inputEditing.addEventListener("keydown", function (event) {
       if (event.key === "Enter") {
-        if (inputEditing.value === "") {
+        if (inputEditing.value.trim() === "") {
           alert("the string cannot be empty.");
           return;
         } else {
-          title.title = inputEditing.value;
+          task.title = inputEditing.value;
           saveData();
           renderTasks(currentFilter);
         }
@@ -94,15 +117,15 @@ function createTaskElement(title) {
     inputEditing.style.display = "none";
   });
   delBtn.addEventListener("click", function () {
-    archivedTasks.push(title);
-    tasks = tasks.filter((t) => t !== title);
+    archivedTasks.push(task);
+    tasks = tasks.filter((t) => t.id !== task.id);
     saveData();
     renderTasks(currentFilter);
   });
 
   input.addEventListener("change", function () {
-    title.completed = input.checked;
-    if (title.completed === true) {
+    task.completed = input.checked;
+    if (task.completed === true) {
       span.style.textDecoration = "line-through";
     } else {
       span.style.textDecoration = "";
@@ -182,12 +205,12 @@ document.getElementById("archiveTasks").addEventListener("click", function () {
     renderTasks(currentFilter);
   }
 });
-function createArchiveTaskElement(title) {
+function createArchiveTaskElement(task) {
   const delBtn = document.createElement("button");
   delBtn.textContent = "×";
   const input = document.createElement("input");
   input.type = "checkbox";
-  input.checked = title.completed;
+  input.checked = task.completed;
   const li = document.createElement("li");
   const span = document.createElement("span");
   const returnBtn = document.createElement("button");
@@ -196,18 +219,18 @@ function createArchiveTaskElement(title) {
   const btnGroup = document.createElement("div");
   btnGroup.classList.add("btnGroup");
 
-  if (title.completed === true) {
+  if (task.completed === true) {
     span.style.textDecoration = "line-through";
   }
-  span.textContent = title.title;
+  span.textContent = task.title;
   delBtn.addEventListener("click", function () {
-    archivedTasks = archivedTasks.filter((t) => t !== title);
+    archivedTasks = archivedTasks.filter((t) => t.id !== task.id);
     saveData();
     renderArchive(currentFilter);
   });
   input.addEventListener("change", function () {
-    title.completed = input.checked;
-    if (title.completed === true) {
+    task.completed = input.checked;
+    if (task.completed === true) {
       span.style.textDecoration = "line-through";
     } else {
       span.style.textDecoration = "";
@@ -215,8 +238,8 @@ function createArchiveTaskElement(title) {
     saveData();
   });
   returnBtn.addEventListener("click", function () {
-    archivedTasks = archivedTasks.filter((t) => t !== title);
-    tasks.push(title);
+    archivedTasks = archivedTasks.filter((t) => t.id !== task.id);
+    tasks.push(task);
     saveData();
     renderArchive(currentFilter);
   });
@@ -228,4 +251,6 @@ function createArchiveTaskElement(title) {
   li.insertBefore(span, btnGroup);
   li.prepend(input);
 }
+loadData();
+
 loadData();
