@@ -52,29 +52,25 @@ function saveData() {
   localStorage.setItem("todo-list-archive", JSON.stringify(archivedTasks));
   localStorage.setItem("todo-list", JSON.stringify(tasks));
 }
-try {
-  function loadData() {
-    let savedArchive = localStorage.getItem("todo-list-archive");
-    let saved = localStorage.getItem("todo-list");
+function loadData() {
+  let savedArchive = localStorage.getItem("todo-list-archive");
+  let saved = localStorage.getItem("todo-list");
 
-    if (saved) {
-      try {
-        tasks = JSON.parse(saved);
-      } catch {
-        tasks = [];
-      }
-      renderTasks("all");
+  if (saved) {
+    try {
+      tasks = JSON.parse(saved);
+    } catch {
+      tasks = [];
     }
-    if (savedArchive) {
-      try {
-        archivedTasks = JSON.parse(savedArchive);
-      } catch {
-        tasks = [];
-      }
+    renderTasks("all");
+  }
+  if (savedArchive) {
+    try {
+      archivedTasks = JSON.parse(savedArchive);
+    } catch {
+      archivedTasks = [];
     }
   }
-} catch {
-  tasks = [];
 }
 
 function createTaskElement(task) {
@@ -251,6 +247,17 @@ function createArchiveTaskElement(task) {
   li.insertBefore(span, btnGroup);
   li.prepend(input);
 }
+document.getElementById("clearBtn").addEventListener("click", function () {
+  if (currentFilter === "all") {
+    tasks = [];
+  } else if (currentFilter === "active") {
+    tasks = tasks.filter((t) => t.completed === true);
+  } else if (currentFilter === "completed") {
+    tasks = tasks.filter((t) => t.completed === false);
+  }
+  saveData();
+  renderTasks(currentFilter);
+});
 loadData();
 
 loadData();
