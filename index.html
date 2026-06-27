@@ -10,14 +10,30 @@
     <header>
       <h1>To-Do List</h1>
     </header>
+    <div id="confirmOverlay">
+      <div id="confirmDialog">
+        <p id="confirmText">Are you sure?</p>
+        <div id="confirmButtons">
+          <button id="confirmYes">Yes</button>
+          <button id="confirmNo">No</button>
+        </div>
+        <label>
+          <input type="checkbox" id="dontShowAgain" />
+          Don't show again
+        </label>
+      </div>
+    </div>
     <main>
       <div class="filterBtn">
         <button id="allBtn">All</button>
         <button id="activeBtn">Active</button>
         <button id="completedBtn">Completed</button>
       </div>
-      <input type="text" id="taskInput" placeholder="Enter Task..." />
-      <button id="addBtn">Add Task</button>
+      <div class="input-group">
+        <input type="text" id="taskInput" placeholder="Enter Task..." />
+        <button id="addBtn">Add Task</button>
+      </div>
+      <button id="clearBtn">Clear All</button>
       <ul id="taskList"></ul>
       <p id="taskCounter">Left: 0 tasks</p>
       <button id="archiveTasks">Archive</button>
