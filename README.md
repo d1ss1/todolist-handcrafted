@@ -2,7 +2,7 @@
 
 ## Functional
 
-**Task filters, input field, add button, task list, strikethrough, delete, task counter, archive.** 
+**Task filters, input field, add button, task list, strikethrough, delete, task counter, archive, clear button, custom overlay.** 
 
 ## Tech 
 
