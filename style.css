@@ -46,7 +46,7 @@ h1 {
 }
 #taskList {
   list-style: none;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 #taskList li {
   background: rgba(145, 180, 255, 0.8);
@@ -130,7 +130,7 @@ main {
 }
 #archiveTasks {
   background: white;
-  float: right;
+  margin-top: 4px;
   padding: 12px;
   border-radius: 16px;
   border: 0px;
@@ -164,7 +164,7 @@ span {
   padding: 12px;
   border: 0px;
   border-radius: 16px;
-  margin-top: 10px;
+  margin-top: 2px;
   cursor: pointer;
   transition: all 0.4s ease;
 }
