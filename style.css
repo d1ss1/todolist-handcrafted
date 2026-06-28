@@ -120,12 +120,9 @@ main {
 }
 #taskList .returnBtn:hover {
   background: rgba(80, 152, 247, 0.726);
-  transform: translateY(-1px);
 }
 #taskList .returnBtn:active {
   background: rgba(80, 152, 247);
-  transform: translateY(0px);
-  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 .btnGroup {
   display: flex;
@@ -181,16 +178,14 @@ span {
 }
 #confirmOverlay {
   position: fixed;
-  height: 100%;
-  width: 100%;
-  z-index: 999;
+  inset: 0;
+  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  display: none;
 }
 #confirmDialog {
   color: rgb(88, 88, 88);
