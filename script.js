@@ -265,11 +265,13 @@ document.getElementById("clearBtn").addEventListener("click", function () {
     saveData();
     renderTasks(currentFilter);
   } else {
-    document.getElementById("confirmOverlay").style.display = "flex";
+    document.getElementById("confirmOverlay").style.opacity = "1";
+    document.getElementById("confirmOverlay").style.pointerEvents = "auto";
   }
 });
 document.getElementById("confirmNo").addEventListener("click", function () {
-  document.getElementById("confirmOverlay").style.display = "none";
+  document.getElementById("confirmOverlay").style.opacity = "0";
+  document.getElementById("confirmOverlay").style.pointerEvents = "none";
 });
 document.getElementById("confirmYes").addEventListener("click", function () {
   if (currentView === "tasks") {
@@ -287,6 +289,8 @@ document.getElementById("confirmYes").addEventListener("click", function () {
     }
     saveData();
     renderTasks(currentFilter);
+    document.getElementById("confirmOverlay").style.opacity = "0";
+    document.getElementById("confirmOverlay").style.pointerEvents = "none";
   } else {
     archivedTasks = [];
     saveData();
@@ -295,6 +299,5 @@ document.getElementById("confirmYes").addEventListener("click", function () {
   if (document.getElementById("dontShowAgain").checked) {
     suppressClearConfirm = true;
   }
-  document.getElementById("confirmOverlay").style.display = "none";
 });
 loadData();
