@@ -66,9 +66,9 @@ h1 {
   transition: all 0.5s ease;
 }
 #taskList button:hover {
-    background-color: #ff5c5c;
-    color: white;
-    border-color: #ff5c5c;
+  background-color: #ff5c5c;
+  color: white;
+  border-color: #ff5c5c;
 }
 #taskList input {
   cursor: pointer;
@@ -177,10 +177,13 @@ span {
   color: black;
 }
 #confirmOverlay {
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
   position: fixed;
   inset: 0;
   z-index: 9999;
-  display: flex;
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.15);
@@ -192,7 +195,7 @@ span {
   background: rgba(255, 255, 255, 0.4);
   padding: 32px 64px;
   border-radius: 32px;
-  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.10);
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
 }
 #confirmText {
   display: flex;
@@ -226,4 +229,7 @@ span {
 #confirmDialog label {
   display: block;
   margin-top: 10px;
+}
+#confirmDialog input {
+  cursor: pointer;
 }
