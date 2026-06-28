@@ -3,6 +3,7 @@ const addBtn = document.getElementById("addBtn");
 const taskList = document.getElementById("taskList");
 const taskCounter = document.getElementById("taskCounter");
 
+let suppressClearConfirm = false;
 let archivedTasks = [];
 let currentView = "tasks";
 let currentFilter = "all";
@@ -248,16 +249,52 @@ function createArchiveTaskElement(task) {
   li.prepend(input);
 }
 document.getElementById("clearBtn").addEventListener("click", function () {
-  if (currentFilter === "all") {
-    tasks = [];
-  } else if (currentFilter === "active") {
-    tasks = tasks.filter((t) => t.completed === true);
-  } else if (currentFilter === "completed") {
-    tasks = tasks.filter((t) => t.completed === false);
+  if (suppressClearConfirm) {
+    if (currentFilter === "all") {
+      archivedTasks.push(...tasks);
+      tasks = [];
+    } else if (currentFilter === "active") {
+      let activeTasks = tasks.filter((t) => t.completed === false);
+      archivedTasks.push(...activeTasks);
+      tasks = tasks.filter((t) => t.completed === true);
+    } else if (currentFilter === "completed") {
+      let completedTasks = tasks.filter((t) => t.completed === true);
+      archivedTasks.push(...completedTasks);
+      tasks = tasks.filter((t) => t.completed === false);
+    }
+    saveData();
+    renderTasks(currentFilter);
+  } else {
+    document.getElementById("confirmOverlay").style.display = "flex";
   }
-  saveData();
-  renderTasks(currentFilter);
 });
-loadData();
-
+document.getElementById("confirmNo").addEventListener("click", function () {
+  document.getElementById("confirmOverlay").style.display = "none";
+});
+document.getElementById("confirmYes").addEventListener("click", function () {
+  if (currentView === "tasks") {
+    if (currentFilter === "all") {
+      archivedTasks.push(...tasks);
+      tasks = [];
+    } else if (currentFilter === "active") {
+      let activeTasks = tasks.filter((t) => t.completed === false);
+      archivedTasks.push(...activeTasks);
+      tasks = tasks.filter((t) => t.completed === true);
+    } else if (currentFilter === "completed") {
+      let completedTasks = tasks.filter((t) => t.completed === true);
+      archivedTasks.push(...completedTasks);
+      tasks = tasks.filter((t) => t.completed === false);
+    }
+    saveData();
+    renderTasks(currentFilter);
+  } else {
+    archivedTasks = [];
+    saveData();
+    renderArchive(currentFilter);
+  }
+  if (document.getElementById("dontShowAgain").checked) {
+    suppressClearConfirm = true;
+  }
+  document.getElementById("confirmOverlay").style.display = "none";
+});
 loadData();
